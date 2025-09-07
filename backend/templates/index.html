@@ -1,0 +1,433 @@
+
+<!doctype html>
+<html lang="en">
+<!-- <head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Oneironet • Dream Interpreter</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+   
+
+  .dream-bg {
+    background:
+      radial-gradient(50% 50% at 10% 5%, rgba(90, 175, 208, 1), transparent 30%),
+      radial-gradient(60% 60% at 85% 15%, rgba(66, 109, 193, 0.55), transparent 30%),
+      radial-gradient(60% 60% at 50% 90%, rgba(120, 43, 168, 0.55), transparent 30%);
+    animation: wash 22s ease-in-out infinite alternate;
+  }
+  @keyframes wash {
+    0% { background-position: 0% 0%, 100% 0%, 50% 100%; }
+    100% { background-position: 8% 6%, 92% 10%, 56% 94%; }
+  }
+
+  .sky {
+    position: fixed;
+    inset: 0;
+    z-index: 0;           
+    pointer-events: none; 
+  }
+
+.cloud-fill { 
+  fill: #587cd7ff; 
+  filter: drop-shadow(0 15px 35px rgba(120,140,255,.45));
+}
+.cloud-fill { fill: #f8faff; opacity: 0.95; }
+.cloud-fill2 { fill: #eaefff; opacity: 0.85; }
+
+
+  @keyframes driftA { from { transform: translateX(-25%);} to { transform: translateX(110%);} }
+  @keyframes driftB { from { transform: translateX(-20%);} to { transform: translateX(115%);} }
+  @keyframes driftC { from { transform: translateX(-30%);} to { transform: translateX(120%);} }
+
+  .c1 { animation: driftA 90s linear infinite; }
+  .c2 { animation: driftB 120s linear infinite; }
+  .c3 { animation: driftC 150s linear infinite; }
+
+  .page { position: relative; z-index: 10; }
+
+
+  </style>
+</head> -->
+
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Oneironet • Dream Interpreter</title>
+
+  <!-- Tailwind (CDN JIT) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Dreamy, clean font -->
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <script>
+    /* set Manrope as the default font */
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Manrope', 'ui-sans-serif', 'system-ui'] },
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* pastel wash (keep your clouds SVG if you want) */
+    .dream-bg {
+      background:
+        radial-gradient(50% 50% at 12% 8%, rgba(108,163,255,.35), transparent 45%),
+        radial-gradient(55% 55% at 85% 20%, rgba(184,154,255,.30), transparent 55%),
+        radial-gradient(60% 60% at 50% 90%, rgba(255,185,235,.28), transparent 60%);
+      animation: wash 22s ease-in-out infinite alternate;
+    }
+    @keyframes wash {
+      0% { background-position: 0% 0%, 100% 0%, 50% 100%; }
+      100% { background-position: 8% 6%, 92% 10%, 56% 94%; }
+    }
+
+/* 
+.cloud-fill { 
+  fill: #587cd7ff; 
+  filter: drop-shadow(0 15px 35px rgba(120,140,255,.45));
+} */
+ .cloud-fill { fill: #f8faff; opacity: 0.95; }
+.cloud-fill2 { fill: #eaefff; opacity: 0.85; }
+
+
+  @keyframes driftA { from { transform: translateX(-25%);} to { transform: translateX(110%);} }
+  @keyframes driftB { from { transform: translateX(-20%);} to { transform: translateX(115%);} }
+  @keyframes driftC { from { transform: translateX(-30%);} to { transform: translateX(120%);} }
+
+  .c1 { animation: driftA 90s linear infinite; }
+  .c2 { animation: driftB 120s linear infinite; }
+  .c3 { animation: driftC 150s linear infinite; }
+
+  .page { position: relative; z-index: 10; }
+    /* section cards: light, glassy */
+    .card { background: rgba(193, 152, 236, 0.62); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); }
+
+    /* cute gradient underline under the H1 */
+    .title-underline {
+      height: 4px; border-radius: 9999px;
+      background: linear-gradient(90deg,#a5b4fc, #f0abfc, #93c5fd);
+      opacity:.9;
+    }
+
+
+  </style>
+</head>
+
+
+
+<body class="min-h-screen font-sans text-slate-800 dream-bg">
+  <!-- optional: keep your SVG clouds block here -->
+  <!-- <svg class="sky" ...>...</svg> -->
+
+  <div class="page max-w-7xl mx-auto px-6 py-10">
+    <!-- Header -->
+    <header class="text-center mb-8">
+      <h1 class="text-4xl font-semibold tracking-tight">Oneironet</h1>
+      <p class="mt-2 text-slate-600 text-base">A privacy-first, multi-lens dream interpreter. No login. No storage.</p>
+      <div class="title-underline w-40 mx-auto mt-3"></div>
+    </header>
+
+    <!-- 3-column layout -->
+    <main class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
+      <!-- LEFT: Moon + Tips toggle -->
+      <aside class="space-y-6 order-2 lg:order-1">
+        <section class="card rounded-2xl p-4 ring-1 ring-white/40 shadow-sm">
+          <h3 class="font-semibold mb-2">Moon</h3>
+          <p id="moon" class="text-sm text-slate-700">—</p>
+        </section>
+
+        <section class="card rounded-2xl p-4 ring-1 ring-white/40 shadow-sm">
+          <details class="group">
+            <summary class="flex items-center justify-between cursor-pointer select-none">
+              <span class="font-semibold">Lucid Tips</span>
+              <span class="text-slate-500 text-sm group-open:rotate-90 transition-transform">›</span>
+            </summary>
+            <ul class="list-disc list-inside text-slate-700 text-sm space-y-1 mt-3">
+              <li>Keep a bedside dream journal; write 1–2 lines on waking.</li>
+              <li>Do 3 daily reality checks (read text twice; look at hands; pinch nose & try to breathe).</li>
+              <li>Sleep hygiene: consistent times, dark/cool room, limit screens pre-sleep.</li>
+              <li>Try WBTB weekly: wake ~5 hours in, read dreams, back to sleep.</li>
+            </ul>
+          </details>
+        </section>
+      </aside>
+
+      <!-- CENTER: Dream input (full card, centered) -->
+      <section class="order-1 lg:order-2">
+        <div class="card rounded-2xl p-5 ring-1 ring-white/40 shadow-sm">
+          <label class="block text-sm text-slate-600 mb-2">Tell us your dream…</label>
+          <textarea id="dream" rows="6"
+            class="w-full rounded-xl p-3 bg-white/70 ring-1 ring-white/60 focus:ring-2 focus:ring-indigo-300 outline-none"
+            placeholder="I was walking through a forest of mirrors…"></textarea>
+
+          <div class="grid sm:grid-cols-3 gap-3 mt-3">
+            <input id="date" type="date"
+              class="rounded-xl p-3 bg-white/70 ring-1 ring-white/60 focus:ring-2 focus:ring-indigo-300"
+              placeholder="Date of dream" title="Date of dream"/>
+            <input id="sign" type="text"
+              class="rounded-xl p-3 bg-white/70 ring-1 ring-white/60 focus:ring-2 focus:ring-indigo-300"
+              placeholder="Sun sign (optional)"/>
+            <button id="go"
+              class="rounded-xl px-4 py-3 bg-indigo-500 hover:bg-indigo-400 text-white font-medium">
+              Interpret
+            </button>
+          </div>
+
+          <details class="mt-3">
+            <summary class="cursor-pointer text-slate-700">Optional context</summary>
+            <div class="grid sm:grid-cols-2 gap-3 mt-2">
+              <input id="stressors" class="rounded-xl p-3 bg-white/70 ring-1 ring-white/60" placeholder="Recent stressors"/>
+              <input id="uponwake" class="rounded-xl p-3 bg-white/70 ring-1 ring-white/60" placeholder="How did you feel on waking?"/>
+            </div>
+          </details>
+        </div>
+
+        <!-- Results -->
+        <section id="results" class="mt-6 hidden space-y-4">
+          <div class="card rounded-2xl p-4 ring-1 ring-white/40 shadow-sm">
+            <h3 class="font-semibold mb-2">Follow-up Questions</h3>
+            <p id="followup" class="text-slate-800 whitespace-pre-wrap"></p>
+          </div>
+
+          <div class="grid md:grid-cols-2 gap-4">
+            <div class="card rounded-2xl p-4 ring-1 ring-white/40 shadow-sm">
+              <h3 class="font-semibold">Jungian</h3>
+              <p id="jung" class="text-slate-800 whitespace-pre-wrap"></p>
+            </div>
+            <div class="card rounded-2xl p-4 ring-1 ring-white/40 shadow-sm">
+              <h3 class="font-semibold">Vedic</h3>
+              <p id="vedic" class="text-slate-800 whitespace-pre-wrap"></p>
+            </div>
+            <div class="card rounded-2xl p-4 ring-1 ring-white/40 shadow-sm">
+              <h3 class="font-semibold">Astrologer</h3>
+              <p id="astro" class="text-slate-800 whitespace-pre-wrap"></p>
+            </div>
+            <div class="card rounded-2xl p-4 ring-1 ring-white/40 shadow-sm">
+              <h3 class="font-semibold">Surrealist</h3>
+              <p id="surreal" class="text-slate-800 whitespace-pre-wrap"></p>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <!-- RIGHT: Visualizer + Morning Ritual toggle -->
+      <aside class="space-y-6 order-3">
+        <section class="card rounded-2xl p-4 ring-1 ring-white/40 shadow-sm">
+          <h3 class="font-semibold mb-2">Dream Vibe Visualizer</h3>
+          <canvas id="vibe" width="380" height="160" class="w-full rounded-xl ring-1 ring-white/50"></canvas>
+          <p class="text-xs text-slate-600 mt-2">An abstract gradient from your dream’s emotion words.</p>
+        </section>
+
+        <section class="card rounded-2xl p-4 ring-1 ring-white/40 shadow-sm">
+          <details class="group">
+            <summary class="flex items-center justify-between cursor-pointer select-none">
+              <span class="font-semibold">Morning Ritual</span>
+              <span class="text-slate-500 text-sm group-open:rotate-90 transition-transform">›</span>
+            </summary>
+            <div class="mt-3">
+              <div class="flex gap-2 mb-2">
+                <label for="dtype" class="sr-only">Dream type</label>
+                <select id="dtype" class="rounded-xl p-2 bg-white/70 ring-1 ring-white/60">
+                  <option value="unknown">Select type…</option>
+                  <option>nightmare</option>
+                  <option>flying</option>
+                  <option>prophetic</option>
+                </select>
+                <button id="ritGo" class="rounded-xl px-3 bg-slate-800 text-white hover:bg-slate-700">Suggest</button>
+              </div>
+              <div id="ritOut" class="text-sm text-slate-800 space-y-1"></div>
+            </div>
+          </details>
+        </section>
+      </aside>
+    </main>
+
+    <footer class="text-slate-500 text-xs mt-10 text-center">
+      Privacy-first: Oneironet stores nothing. Sessions are ephemeral.
+    </footer>
+  </div>
+</body>
+
+
+<script>
+const $ = sel => document.querySelector(sel);
+
+
+
+function hueFromString(s){
+  let h = 0;
+  for (let i=0;i<s.length;i++) h = (h*31 + s.charCodeAt(i)) >>> 0;
+  return h % 360; // 0..359
+}
+
+function toRGB(h, s=70, l=55){
+  // tiny HSL→RGB
+  s/=100; l/=100;
+  const k = n => (n + h/30) % 12;
+  const a = s * Math.min(l,1-l);
+  const f = n => l - a * Math.max(-1, Math.min(k(n)-3, Math.min(9-k(n),1)));
+  return `rgb(${Math.round(255*f(0))},${Math.round(255*f(8))},${Math.round(255*f(4))})`;
+}
+
+function emotionColors(text){
+  const lex = {
+    // positive
+    calm: ['calm','peace','serene','soothe','still','safe','relief'],
+    joy: ['joy','happy','bliss','delight','playful','excited','euphoric'],
+    love: ['love','affection','tender','warm','care','compassion'],
+    awe:  ['awe','wonder','vast','cosmic','sublime','mystical','sacred'],
+    curious: ['curious','interest','intrigue','explore','discover'],
+    // mixed/neutral
+    confusion: ['confused','lost','uncertain','maze','fog','puzzle'],
+    // negative
+    fear: ['fear','scared','afraid','terror','panic','nightmare','chase'],
+    anxious: ['anxious','worry','nervous','uneasy','stress','tension'],
+    anger: ['anger','angry','rage','irritated','furious','frustrated'],
+    grief: ['sad','grief','loss','lonely','cry','mourning','hurt'],
+  };
+
+  const words = (text.toLowerCase().match(/[a-z]+/g) || []);
+  const hits = [];
+
+  for (const [k, arr] of Object.entries(lex)) {
+    if (words.some(w => arr.includes(w))) hits.push(k);
+  }
+
+  // map emotions → base hues
+  const baseHue = {
+    calm: 170, joy: 130, love: 330, awe: 220, curious: 200,
+    confusion: 270, fear: 0, anxious: 45, anger: 8, grief: 210
+  };
+
+  if (hits.length) {
+    const hues = hits.map(k => baseHue[k]);
+    // spread to 2–4 colors
+    const hs = [hues[0], hues[1] ?? (hues[0]+40)%360, hues[2] ?? (hues[0]+80)%360];
+    return hs.map(h => toRGB(h));
+  }
+
+  // Fallback: derive hues from text so it ALWAYS changes
+  const h1 = hueFromString(text||'oneiro-1');
+  const h2 = (h1 + 60) % 360;
+  const h3 = (h1 + 120) % 360;
+  return [toRGB(h1), toRGB(h2), toRGB(h3)];
+}
+
+function drawVibe(){
+  const canvas = document.getElementById("vibe");
+  const ctx = canvas.getContext("2d");
+  const dpr = window.devicePixelRatio || 1;
+  // CSS size
+  const cssW = canvas.clientWidth || 350;
+  const cssH = canvas.clientHeight || 140;
+  // set internal pixels for crispness
+  canvas.width = Math.round(cssW * dpr);
+  canvas.height = Math.round(cssH * dpr);
+  ctx.scale(dpr, dpr);
+
+  const cols = emotionColors(document.getElementById("dream").value);
+  const grad = ctx.createLinearGradient(0,0,cssW,cssH);
+  cols.forEach((c,i)=> grad.addColorStop(i/(cols.length-1), c));
+  ctx.fillStyle = grad;
+  ctx.fillRect(0,0,cssW,cssH);
+}
+document.getElementById("dream").addEventListener("input", drawVibe);
+drawVibe();
+["input","change","blur"].forEach(ev =>
+  document.getElementById("dream").addEventListener(ev, drawVibe)
+);
+
+// $("#dream").addEventListener("input", drawVibe);
+
+async function fetchMoon(dateStr){
+  const r = await fetch(`/api/moonphase${dateStr?`?date=${dateStr}`:''}`);
+  return r.json();
+}
+
+
+
+async function interpret(){
+  const btn = $("#go");
+  const dream = $("#dream").value.trim();
+  if(!dream){ alert("Please enter your dream."); return; }
+
+  btn.disabled = true; btn.textContent = "Interpreting…";
+
+  try {
+    const date = $("#date").value || null;
+    const sun  = $("#sign").value || null;
+
+    const answers = {
+      stressors: $("#stressors").value || "",
+      upon_waking: $("#uponwake").value || ""
+    };
+
+    // Moon (best-effort; don't fail UI if this errors)
+    try {
+      const moonResp = await fetch(`/api/moonphase${date?`?date=${date}`:''}`);
+      if (moonResp.ok) {
+        const moon = await moonResp.json();
+        $("#moon").textContent = `${moon.phase_name} • ${moon.illumination}% — ${moon.influence}`;
+      }
+    } catch(e){ console.warn("Moon fetch failed", e); }
+
+    const resp = await fetch("/api/interpret", {
+      method:"POST",
+      headers: {"Content-Type":"application/json"},
+      body: JSON.stringify({ dream_text: dream, dream_date: date, sun_sign: sun, answers })
+    });
+
+    if (!resp.ok) {
+      const text = await resp.text();
+      throw new Error(`Request failed ${resp.status}: ${text.slice(0,300)}`);
+    }
+
+    const data = await resp.json();
+    if (data.error) { throw new Error(data.error); }
+
+    $("#results").classList.remove("hidden");
+    $("#followup").textContent = data.agents.followup || "—";
+    $("#jung").textContent     = data.agents.jungian   || "—";
+    $("#vedic").textContent    = data.agents.vedic     || "—";
+    $("#astro").textContent    = data.agents.astrologer|| "—";
+    $("#surreal").textContent  = data.agents.surrealist|| "—";
+  } catch (err) {
+    console.error(err);
+    alert(`Interpretation failed:\n${err.message}`);
+  } finally {
+    btn.disabled = false; btn.textContent = "Interpret";
+  }
+}
+
+
+
+
+async function ritual(){
+  const dtype = $("#dtype").value;
+  const dream = $("#dream").value;
+  const r = await fetch("/api/ritual", {
+    method:"POST",
+    headers: {"Content-Type":"application/json"},
+    body: JSON.stringify({ dream_type: dtype, dream_text: dream })
+  });
+  const data = await r.json();
+  $("#ritOut").innerHTML = `
+    <div><b>Breath:</b> ${data.breath}</div>
+    <div><b>Affirmation:</b> “${data.affirm}”</div>
+    <div><b>Prompt:</b> ${data.prompt}</div>
+  `;
+}
+
+$("#go").addEventListener("click", interpret);
+// $("#symGo").addEventListener("click", lookupSymbol);
+$("#ritGo").addEventListener("click", ritual);
+
+drawVibe();
+</script>
+</body>
+</html>
