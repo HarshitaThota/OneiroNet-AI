@@ -1,7 +1,9 @@
 # Oneironet 🌙
 Multi-Lens Dream Interpretation, Reimagined with AI.
 From Jung to Vedic to Surrealist, Oneironet lets AI agents offer you multiple ways to understand your night’s journey built with **FastAPI**, **Vanilla JS + Tailwind**, and **OpenAI**.  
-Oneironet allows users to record their dreams and receive diverse interpretations (Jungian, Vedic, Astrological, and Surrealist), along with moon phases, morning ritual suggestions, and lucid dreaming tips — all in a clean, aesthetic interface.  
+
+
+Oneironet allows users to record their dreams and receive diverse interpretations (Jungian, Vedic, Astrological, and Surrealist), along with moon phases, morning ritual suggestions, and lucid dreaming tips — all in a clean and super aesthetic interface hehe.
 
 ---
 
