@@ -149,25 +149,6 @@ async def ritual(req: RitualReq):
     }
     return JSONResponse(mapping.get(t, mapping["unknown"]))
 
-
-# def call_openai(messages: List[dict], model: str = "gpt-4o-mini") -> str:
-#     try:
-#         import openai
-#         api_key = os.getenv('OPENAI_API_KEY')
-#         if not api_key:
-#             return "[OpenAI key not configured]"
-        
-#         openai.api_key = api_key
-#         resp = openai.ChatCompletion.create(
-#             model=model,
-#             messages=messages,
-#             temperature=0.8,
-#             max_tokens=400
-#         )
-#         return resp.choices[0].message.content.strip()
-#     except Exception as e:
-#         return f"[OpenAI error: {str(e)}]"
-# NEW client import for openai >= 1.x
 from openai import OpenAI
 client = OpenAI()  
 
