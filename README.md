@@ -83,7 +83,7 @@ Then open index.html in your browser or serve via a local server.
 
 
 
-
+---
 ### Usage Process
 
 - Open http://localhost:8000
@@ -117,7 +117,7 @@ Then open index.html in your browser or serve via a local server.
 - Vanta.js / Three.js — Animated “dreamy” hero background
 
 - Docker — Containerized deployment
-
+---
 ### Credits
 
 Moon phase logic adapted from open astronomy resources
@@ -126,6 +126,7 @@ Dream lexicons inspired by Jungian/astrology traditions
 
 Visual inspiration: glassmorphism + dreamlike cloudscapes
 
+---
 ### About
 
 Your playful dream companion for symbolic, creative reflection 🌌
