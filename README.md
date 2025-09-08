@@ -1,4 +1,4 @@
-# Oneironet 🌙
+# Oneironet 🌙 - Agentic Dream Interpreter
 Multi-Lens Dream Interpretation, Reimagined with AI.
 From Jung to Vedic to Surrealist, Oneironet lets AI agents offer you multiple ways to understand your night’s journey built with **FastAPI**, **Vanilla JS + Tailwind**, and **OpenAI**.  
 
