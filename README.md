@@ -6,7 +6,8 @@ Oneironet allows users to record their dreams and receive diverse interpretation
 ---
 
 ## Current UI ✨
-*(Add a screenshot here — e.g. `![UI](docs/screenshot.png)`)  
+`![UI](UI.png)`
+`![UI](UI2.png)`
 
 ---
 
