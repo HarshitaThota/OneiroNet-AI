@@ -1,55 +1,6 @@
 
 <!doctype html>
 <html lang="en">
-<!-- <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Oneironet • Dream Interpreter</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-   
-
-  .dream-bg {
-    background:
-      radial-gradient(50% 50% at 10% 5%, rgba(90, 175, 208, 1), transparent 30%),
-      radial-gradient(60% 60% at 85% 15%, rgba(66, 109, 193, 0.55), transparent 30%),
-      radial-gradient(60% 60% at 50% 90%, rgba(120, 43, 168, 0.55), transparent 30%);
-    animation: wash 22s ease-in-out infinite alternate;
-  }
-  @keyframes wash {
-    0% { background-position: 0% 0%, 100% 0%, 50% 100%; }
-    100% { background-position: 8% 6%, 92% 10%, 56% 94%; }
-  }
-
-  .sky {
-    position: fixed;
-    inset: 0;
-    z-index: 0;           
-    pointer-events: none; 
-  }
-
-.cloud-fill { 
-  fill: #587cd7ff; 
-  filter: drop-shadow(0 15px 35px rgba(120,140,255,.45));
-}
-.cloud-fill { fill: #f8faff; opacity: 0.95; }
-.cloud-fill2 { fill: #eaefff; opacity: 0.85; }
-
-
-  @keyframes driftA { from { transform: translateX(-25%);} to { transform: translateX(110%);} }
-  @keyframes driftB { from { transform: translateX(-20%);} to { transform: translateX(115%);} }
-  @keyframes driftC { from { transform: translateX(-30%);} to { transform: translateX(120%);} }
-
-  .c1 { animation: driftA 90s linear infinite; }
-  .c2 { animation: driftB 120s linear infinite; }
-  .c3 { animation: driftC 150s linear infinite; }
-
-  .page { position: relative; z-index: 10; }
-
-
-  </style>
-</head> -->
-
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -74,34 +25,47 @@
 
   <style>
     /* pastel wash (keep your clouds SVG if you want) */
+    .sky {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;          /* behind .page (which has z-index:10) */
+  pointer-events: none;
+}
     .dream-bg {
-      background:
-        radial-gradient(50% 50% at 12% 8%, rgba(108,163,255,.35), transparent 45%),
-        radial-gradient(55% 55% at 85% 20%, rgba(184,154,255,.30), transparent 55%),
-        radial-gradient(60% 60% at 50% 90%, rgba(255,185,235,.28), transparent 60%);
-      animation: wash 22s ease-in-out infinite alternate;
-    }
+  background:
+    radial-gradient(60% 60% at 12% 8%, rgba(108,163,255,.55), transparent 75%),
+    radial-gradient(70% 70% at 85% 20%, rgba(184,154,255,.45), transparent 80%),
+    radial-gradient(80% 80% at 50% 90%, rgba(255,185,235,.42), transparent 85%);
+  animation: wash 22s ease-in-out infinite alternate;
+}
+
     @keyframes wash {
       0% { background-position: 0% 0%, 100% 0%, 50% 100%; }
       100% { background-position: 8% 6%, 92% 10%, 56% 94%; }
     }
 
-/* 
+
 .cloud-fill { 
-  fill: #587cd7ff; 
-  filter: drop-shadow(0 15px 35px rgba(120,140,255,.45));
-} */
- .cloud-fill { fill: #f8faff; opacity: 0.95; }
-.cloud-fill2 { fill: #eaefff; opacity: 0.85; }
+  fill: #f0f4ff;   /* soft bluish white */
+  opacity: 0.95;
+  filter: drop-shadow(0 20px 40px rgba(120,140,255,0.6));
+}
+.cloud-fill2 { 
+  fill: #dde6ff;
+  opacity: 0.9;
+  filter: drop-shadow(0 15px 30px rgba(150,120,255,0.5));
+}
 
 
   @keyframes driftA { from { transform: translateX(-25%);} to { transform: translateX(110%);} }
   @keyframes driftB { from { transform: translateX(-20%);} to { transform: translateX(115%);} }
   @keyframes driftC { from { transform: translateX(-30%);} to { transform: translateX(120%);} }
 
-  .c1 { animation: driftA 90s linear infinite; }
-  .c2 { animation: driftB 120s linear infinite; }
-  .c3 { animation: driftC 150s linear infinite; }
+.c1 { animation: driftA 120s linear infinite; }
+.c2 { animation: driftB 160s linear infinite; }
+.c3 { animation: driftC 200s linear infinite; }
 
   .page { position: relative; z-index: 10; }
     /* section cards: light, glassy */
@@ -119,10 +83,43 @@
 </head>
 
 
-
 <body class="min-h-screen font-sans text-slate-800 dream-bg">
-  <!-- optional: keep your SVG clouds block here -->
-  <!-- <svg class="sky" ...>...</svg> -->
+  <!-- Inline SVG cloud layer -->
+  <svg class="sky" viewBox="0 0 100 100" preserveAspectRatio="none">
+    <defs>
+      <g id="cloud">
+        <ellipse cx="20" cy="18" rx="12" ry="7" class="cloud-fill"/>
+        <ellipse cx="30" cy="16" rx="10" ry="6" class="cloud-fill"/>
+        <ellipse cx="40" cy="18" rx="13" ry="8" class="cloud-fill"/>
+        <rect x="18" y="18" width="26" height="8" rx="4" class="cloud-fill"/>
+      </g>
+    </defs>
+
+    <!-- Top row -->
+    <g class="c1" style="transform-box: fill-box; transform-origin: 0 0;">
+      <use href="#cloud" x="-30" y="12"/>
+      <use href="#cloud" x="15"  y="11" transform="scale(1.1)"/>
+      <use href="#cloud" x="60"  y="12" transform="scale(0.95)"/>
+      <use href="#cloud" x="105" y="10" transform="scale(1.05)"/>
+    </g>
+
+    <!-- Mid row -->
+    <g class="c2" style="transform-box: fill-box; transform-origin: 0 0;">
+      <use href="#cloud" x="-28" y="40" transform="scale(1.2)"/>
+      <use href="#cloud" x="22"  y="39" transform="scale(0.98)"/>
+      <use href="#cloud" x="72"  y="41" transform="scale(1.12)"/>
+      <use href="#cloud" x="112" y="40" transform="scale(1.0)"/>
+    </g>
+
+    <!-- Bottom row -->
+    <g class="c3" style="transform-box: fill-box; transform-origin: 0 0;">
+      <use href="#cloud" x="-35" y="72" transform="scale(1.06)"/>
+      <use href="#cloud" x="18"  y="73" transform="scale(1.18)"/>
+      <use href="#cloud" x="64"  y="71" transform="scale(0.96)"/>
+      <use href="#cloud" x="108" y="74" transform="scale(1.08)"/>
+    </g>
+  </svg>
+  <!-- …then your existing <div class="page ..."> content -->
 
   <div class="page max-w-7xl mx-auto px-6 py-10">
     <!-- Header -->
@@ -134,121 +131,138 @@
 
     <!-- 3-column layout -->
     <main class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
-      <!-- LEFT: Moon + Tips toggle -->
-      <aside class="space-y-6 order-2 lg:order-1">
-        <section class="card rounded-2xl p-4 ring-1 ring-white/40 shadow-sm">
-          <h3 class="font-semibold mb-2">Moon</h3>
-          <p id="moon" class="text-sm text-slate-700">—</p>
-        </section>
+      <!-- LEFT: Moon + Tips + Morning Ritual -->
+<aside class="space-y-6 order-2 lg:order-1">
+  <section class="card rounded-2xl p-4 ring-1 ring-white/40 shadow-sm">
+    <h3 class="font-semibold mb-2">Moon</h3>
+    <p id="moon" class="text-sm text-slate-700">—</p>
+  </section>
 
-        <section class="card rounded-2xl p-4 ring-1 ring-white/40 shadow-sm">
-          <details class="group">
-            <summary class="flex items-center justify-between cursor-pointer select-none">
-              <span class="font-semibold">Lucid Tips</span>
-              <span class="text-slate-500 text-sm group-open:rotate-90 transition-transform">›</span>
-            </summary>
-            <ul class="list-disc list-inside text-slate-700 text-sm space-y-1 mt-3">
-              <li>Keep a bedside dream journal; write 1–2 lines on waking.</li>
-              <li>Do 3 daily reality checks (read text twice; look at hands; pinch nose & try to breathe).</li>
-              <li>Sleep hygiene: consistent times, dark/cool room, limit screens pre-sleep.</li>
-              <li>Try WBTB weekly: wake ~5 hours in, read dreams, back to sleep.</li>
-            </ul>
-          </details>
-        </section>
-      </aside>
+  <section class="card rounded-2xl p-4 ring-1 ring-white/40 shadow-sm">
+    <details class="group">
+      <summary class="flex items-center justify-between cursor-pointer select-none">
+        <span class="font-semibold">Lucid Tips</span>
+        <span class="text-slate-500 text-sm group-open:rotate-90 transition-transform">›</span>
+      </summary>
+      <ul class="list-disc list-inside text-slate-700 text-sm space-y-1 mt-3">
+        <li>Keep a bedside dream journal; write 1–2 lines on waking.</li>
+        <li>Do 3 daily reality checks (read text twice; look at hands; pinch nose & try to breathe).</li>
+        <li>Sleep hygiene: consistent times, dark/cool room, limit screens pre-sleep.</li>
+        <li>Try WBTB weekly: wake ~5 hours in, read dreams, back to sleep.</li>
+      </ul>
+    </details>
+  </section>
+
+  <!-- 💫 Morning Ritual now lives here -->
+  <section class="card rounded-2xl p-4 ring-1 ring-white/40 shadow-sm">
+    <details class="group">
+      <summary class="flex items-center justify-between cursor-pointer select-none">
+        <span class="font-semibold">Morning Ritual</span>
+        <span class="text-slate-500 text-sm group-open:rotate-90 transition-transform">›</span>
+      </summary>
+      <div class="mt-3">
+        <div class="flex gap-2 mb-2">
+          <label for="dtype" class="sr-only">Dream type</label>
+          <select id="dtype" class="rounded-xl p-2 bg-white/70 ring-1 ring-white/60">
+            <option value="unknown">Select type…</option>
+            <option>nightmare</option>
+            <option>flying</option>
+            <option>prophetic</option>
+          </select>
+          <button id="ritGo" class="rounded-xl px-3 bg-slate-800 text-white hover:bg-slate-700">Suggest</button>
+        </div>
+        <div id="ritOut" class="text-sm text-slate-800 space-y-1"></div>
+      </div>
+    </details>
+  </section>
+    <section class="card rounded-2xl p-4 ring-1 ring-white/40 shadow-sm">
+    <h3 class="font-semibold mb-2">Dream Vibe Visualizer</h3>
+    <canvas id="vibe" width="380" height="160" class="w-full rounded-xl ring-1 ring-white/50"></canvas>
+    <p class="text-xs text-slate-600 mt-2">An abstract gradient from your dream’s emotion words.</p>
+  </section>
+</aside>
+
 
       <!-- CENTER: Dream input (full card, centered) -->
-      <section class="order-1 lg:order-2">
-        <div class="card rounded-2xl p-5 ring-1 ring-white/40 shadow-sm">
+<section class="order-1 lg:order-2 lg:col-span-2">
+  <div class="card rounded-2xl p-6 ring-1 ring-white/40 shadow-sm">
           <label class="block text-sm text-slate-600 mb-2">Tell us your dream…</label>
           <textarea id="dream" rows="6"
             class="w-full rounded-xl p-3 bg-white/70 ring-1 ring-white/60 focus:ring-2 focus:ring-indigo-300 outline-none"
             placeholder="I was walking through a forest of mirrors…"></textarea>
 
-          <div class="grid sm:grid-cols-3 gap-3 mt-3">
-            <input id="date" type="date"
-              class="rounded-xl p-3 bg-white/70 ring-1 ring-white/60 focus:ring-2 focus:ring-indigo-300"
-              placeholder="Date of dream" title="Date of dream"/>
-            <input id="sign" type="text"
-              class="rounded-xl p-3 bg-white/70 ring-1 ring-white/60 focus:ring-2 focus:ring-indigo-300"
-              placeholder="Sun sign (optional)"/>
-            <button id="go"
-              class="rounded-xl px-4 py-3 bg-indigo-500 hover:bg-indigo-400 text-white font-medium">
-              Interpret
-            </button>
-          </div>
+          <div class="grid sm:grid-cols-4 gap-3 mt-3">
+  <input id="date" type="date"
+    class="rounded-xl p-3 bg-white/70 ring-1 ring-white/60 focus:ring-2 focus:ring-indigo-300"
+    placeholder="Date of dream" title="Date of dream"/>
+  
+  <input id="sign" type="text"
+    class="rounded-xl p-3 bg-white/70 ring-1 ring-white/60 focus:ring-2 focus:ring-indigo-300"
+    placeholder="Sun sign (optional)"/>
+
+  <!-- 💡 New dropdown -->
+  <select id="lens" class="rounded-xl p-3 bg-white/70 ring-1 ring-white/60 focus:ring-2 focus:ring-indigo-300">
+    <option value="jungian">Jungian</option>
+    <option value="vedic">Vedic</option>
+    <option value="astrologer">Astrologer</option>
+    <option value="surrealist">Surrealist</option>
+  </select>
+
+  <button id="go"
+    class="rounded-xl px-4 py-3 bg-indigo-500 hover:bg-indigo-400 text-white font-medium">
+    Interpret
+  </button>
+</div>
+
 
           <details class="mt-3">
             <summary class="cursor-pointer text-slate-700">Optional context</summary>
             <div class="grid sm:grid-cols-2 gap-3 mt-2">
               <input id="stressors" class="rounded-xl p-3 bg-white/70 ring-1 ring-white/60" placeholder="Recent stressors"/>
-              <input id="uponwake" class="rounded-xl p-3 bg-white/70 ring-1 ring-white/60" placeholder="How did you feel on waking?"/>
+              <input id="uponwake" class="rounded-xl p-3 bg-white/70 ring-1 ring-white/60" placeholder="Feelings upon waking"/>
             </div>
           </details>
         </div>
 
         <!-- Results -->
-        <section id="results" class="mt-6 hidden space-y-4">
-          <div class="card rounded-2xl p-4 ring-1 ring-white/40 shadow-sm">
-            <h3 class="font-semibold mb-2">Follow-up Questions</h3>
-            <p id="followup" class="text-slate-800 whitespace-pre-wrap"></p>
-          </div>
+<!-- WIDE Results (replace your current #results) -->
+<section id="results" class="mt-6 hidden lg:col-span-2">
+  <!-- Follow-ups -->
+  
 
-          <div class="grid md:grid-cols-2 gap-4">
-            <div class="card rounded-2xl p-4 ring-1 ring-white/40 shadow-sm">
-              <h3 class="font-semibold">Jungian</h3>
-              <p id="jung" class="text-slate-800 whitespace-pre-wrap"></p>
-            </div>
-            <div class="card rounded-2xl p-4 ring-1 ring-white/40 shadow-sm">
-              <h3 class="font-semibold">Vedic</h3>
-              <p id="vedic" class="text-slate-800 whitespace-pre-wrap"></p>
-            </div>
-            <div class="card rounded-2xl p-4 ring-1 ring-white/40 shadow-sm">
-              <h3 class="font-semibold">Astrologer</h3>
-              <p id="astro" class="text-slate-800 whitespace-pre-wrap"></p>
-            </div>
-            <div class="card rounded-2xl p-4 ring-1 ring-white/40 shadow-sm">
-              <h3 class="font-semibold">Surrealist</h3>
-              <p id="surreal" class="text-slate-800 whitespace-pre-wrap"></p>
-            </div>
-          </div>
-        </section>
-      </section>
+  <!-- Interpretation (one lens), wide + two columns on lg -->
+  <div class="card rounded-2xl p-6 ring-1 ring-white/40 shadow-sm">
+    <div class="flex items-center justify-between gap-3 mb-3">
+      <h3 class="font-semibold">
+        <span id="resultTitle">Interpretation</span>
+        <span class="ml-2 text-xs px-2 py-1 rounded-full bg-white/60 text-slate-700 align-middle" id="lensPill">—</span>
+      </h3>
 
-      <!-- RIGHT: Visualizer + Morning Ritual toggle -->
-      <aside class="space-y-6 order-3">
-        <section class="card rounded-2xl p-4 ring-1 ring-white/40 shadow-sm">
-          <h3 class="font-semibold mb-2">Dream Vibe Visualizer</h3>
-          <canvas id="vibe" width="380" height="160" class="w-full rounded-xl ring-1 ring-white/50"></canvas>
-          <p class="text-xs text-slate-600 mt-2">An abstract gradient from your dream’s emotion words.</p>
-        </section>
+      <!-- small actions (optional) -->
+      <div class="flex gap-2">
+        <button id="copyInterp" class="text-xs rounded-lg px-3 py-1 bg-white/70 hover:bg-white/80 ring-1 ring-white/60">Copy</button>
+        <button id="downloadInterp" class="text-xs rounded-lg px-3 py-1 bg-white/70 hover:bg-white/80 ring-1 ring-white/60">Download</button>
+      </div>
+    </div>
 
-        <section class="card rounded-2xl p-4 ring-1 ring-white/40 shadow-sm">
-          <details class="group">
-            <summary class="flex items-center justify-between cursor-pointer select-none">
-              <span class="font-semibold">Morning Ritual</span>
-              <span class="text-slate-500 text-sm group-open:rotate-90 transition-transform">›</span>
-            </summary>
-            <div class="mt-3">
-              <div class="flex gap-2 mb-2">
-                <label for="dtype" class="sr-only">Dream type</label>
-                <select id="dtype" class="rounded-xl p-2 bg-white/70 ring-1 ring-white/60">
-                  <option value="unknown">Select type…</option>
-                  <option>nightmare</option>
-                  <option>flying</option>
-                  <option>prophetic</option>
-                </select>
-                <button id="ritGo" class="rounded-xl px-3 bg-slate-800 text-white hover:bg-slate-700">Suggest</button>
-              </div>
-              <div id="ritOut" class="text-sm text-slate-800 space-y-1"></div>
-            </div>
-          </details>
-        </section>
-      </aside>
+    <!-- wider text, split into two columns on large screens -->
+    <div id="interp"
+         class="text-slate-800 whitespace-pre-wrap leading-relaxed text-[15px] md:text-base lg:columns-2 lg:gap-10">
+    </div>
+  </div>
+  <div class="card rounded-2xl p-5 ring-1 ring-white/40 shadow-sm mb-4">
+    <h3 class="font-semibold mb-2">Follow-up Journal Prompts</h3>
+    <p id="followup" class="text-slate-800 whitespace-pre-wrap"></p>
+  </div>
+</section>
+
+
     </main>
 
     <footer class="text-slate-500 text-xs mt-10 text-center">
       Privacy-first: Oneironet stores nothing. Sessions are ephemeral.
+      Interpretations are for curiosity and creative reflection only — not medical or psychological advice.
+
     </footer>
   </div>
 </body>
@@ -256,8 +270,6 @@
 
 <script>
 const $ = sel => document.querySelector(sel);
-
-
 
 function hueFromString(s){
   let h = 0;
@@ -390,12 +402,21 @@ async function interpret(){
     const data = await resp.json();
     if (data.error) { throw new Error(data.error); }
 
-    $("#results").classList.remove("hidden");
-    $("#followup").textContent = data.agents.followup || "—";
-    $("#jung").textContent     = data.agents.jungian   || "—";
-    $("#vedic").textContent    = data.agents.vedic     || "—";
-    $("#astro").textContent    = data.agents.astrologer|| "—";
-    $("#surreal").textContent  = data.agents.surrealist|| "—";
+
+  $("#results").classList.remove("hidden");
+  $("#followup").textContent = data.agents.followup || "—";
+
+  const lens = $("#lens").value;
+  const labels = { jungian:"Jungian", vedic:"Vedic", astrologer:"Astrologer", surrealist:"Surrealist" };
+
+  $("#resultTitle").textContent = `${labels[lens] ?? "Interpretation"} Interpretation`;
+  $("#lensPill").textContent = labels[lens] ?? "—";
+  $("#interp").textContent = data.agents[lens] || "—";
+
+
+
+document.getElementById("results").scrollIntoView({ behavior: "smooth", block: "start" });
+
   } catch (err) {
     console.error(err);
     alert(`Interpretation failed:\n${err.message}`);
@@ -428,6 +449,58 @@ $("#go").addEventListener("click", interpret);
 $("#ritGo").addEventListener("click", ritual);
 
 drawVibe();
+
+// Copy
+(() => {
+  const btn = document.getElementById("copyInterp");
+  const target = document.getElementById("interp");
+  if (!btn || !target) return;
+
+  btn.addEventListener("click", async () => {
+    const text = target.textContent.trim();
+    if (!text) { alert("Nothing to copy yet."); return; }
+
+    const setLabel = (s) => { btn.textContent = s; setTimeout(() => btn.textContent = "Copy", 1200); };
+
+    try {
+      // Prefer Clipboard API when available + secure context
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(text);
+        setLabel("Copied!");
+        return;
+      }
+      // Fallback: hidden textarea + execCommand
+      const ta = document.createElement("textarea");
+      ta.value = text;
+      ta.style.position = "fixed";
+      ta.style.opacity = "0";
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand("copy");
+      ta.remove();
+      setLabel("Copied!");
+    } catch (e) {
+      console.error("Copy failed", e);
+      alert("Copy failed — try selecting the text and pressing ⌘/Ctrl+C.");
+    }
+  });
+})();
+
+
+
+// Download as .txt
+document.getElementById("downloadInterp").addEventListener("click", () => {
+  const text = document.getElementById("interp").textContent;
+  const blob = new Blob([text], { type: "text/plain" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url; a.download = "oneironet-interpretation.txt";
+  document.body.appendChild(a); a.click();
+  a.remove(); URL.revokeObjectURL(url);
+});
+document.getElementById("copyInterp")?.addEventListener("click", async () => { /* ... */ });
+document.getElementById("downloadInterp")?.addEventListener("click", () => { /* ... */ });
+
 </script>
 </body>
 </html>
